@@ -46,6 +46,10 @@ export class TokenInformationService {
         usedlimit: key.usedlimit + 1,
       },
     });
-    return { 'rate limit': key.ratelimit } as unknown as string;
+
+    return {
+      'rate limit': key.ratelimit,
+      'random api response data': 'Hello world',
+    } as unknown as string;
   }
 }
