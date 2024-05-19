@@ -1,6 +1,6 @@
 import { Command, CommandRunner, Option } from 'nest-commander';
-import { UpdateKeyRateLimitCommandInputOptions } from './admin-management.models';
-import { PrismaService } from '../prisma/prisma.service';
+import { UpdateKeyRateLimitCommandInputOptions } from '../admin-key-management.models';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Command({
   name: 'update-rate-limit',

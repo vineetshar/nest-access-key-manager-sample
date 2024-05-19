@@ -1,5 +1,5 @@
 import { Command, CommandRunner } from 'nest-commander';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Command({
   name: 'list-all-keys',

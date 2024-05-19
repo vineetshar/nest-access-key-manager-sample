@@ -1,8 +1,8 @@
 import { Command, CommandRunner, Option } from 'nest-commander';
-import { GenerateKeyCommandInputOptions } from './admin-management.models';
+import { GenerateKeyCommandInputOptions } from '../admin-key-management.models';
 import { v4 as uuidv4 } from 'uuid';
 import * as crypto from 'crypto';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import { AccessKeyType } from '@prisma/client';
 
 @Command({

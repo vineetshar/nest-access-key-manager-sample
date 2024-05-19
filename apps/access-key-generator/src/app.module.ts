@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AdminKeyManagementModule } from './admin-commands/admin-key-management-commands.module';
+import { AdminKeyManagementModule } from './admin/admin-key-management-commands.module';
+import { UserCommandsModule } from './user/user-commands.module';
 
 @Module({
-  imports: [AdminKeyManagementModule],
+  imports: [AdminKeyManagementModule, UserCommandsModule],
 })
 export class AppModule {}

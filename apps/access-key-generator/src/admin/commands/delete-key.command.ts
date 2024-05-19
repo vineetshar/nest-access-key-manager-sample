@@ -1,6 +1,6 @@
 import { Command, CommandRunner, Option } from 'nest-commander';
-import { PrismaService } from '../prisma/prisma.service';
-import { DeleteKeyCommandInputOptions } from './admin-management.models';
+import { PrismaService } from '../../prisma/prisma.service';
+import { DeleteKeyCommandInputOptions } from '../admin-key-management.models';
 
 @Command({
   name: 'delete-key',

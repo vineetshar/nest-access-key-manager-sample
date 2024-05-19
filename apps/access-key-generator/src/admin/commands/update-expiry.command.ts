@@ -1,6 +1,6 @@
 import { Command, CommandRunner, Option } from 'nest-commander';
-import { UpdateKeyExpiryCommandInputOptions } from './admin-management.models';
-import { PrismaService } from '../prisma/prisma.service';
+import { UpdateKeyExpiryCommandInputOptions } from '../admin-key-management.models';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Command({
   name: 'update-expiry',

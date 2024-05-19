@@ -15,6 +15,8 @@
     "update-expiry": "ts-node src/main.ts update-expiry",
     "update-rate-limit": "ts-node src/main.ts update-rate-limit",
     "delete-key": "ts-node src/main.ts delete-key",
+    "update-key-status":"ts-node src/main.ts update-key-status",
+    "fetch-key-details":"ts-node src/main.ts fetch-key-details",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
