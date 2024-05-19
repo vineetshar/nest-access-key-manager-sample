@@ -6,3 +6,7 @@ export type GenerateKeyCommandInputOptions = {
   ratelimit: number;
   expiry: Date;
 };
+
+export type DeleteKeyCommandInputOptions = {
+  keyId: string;
+};

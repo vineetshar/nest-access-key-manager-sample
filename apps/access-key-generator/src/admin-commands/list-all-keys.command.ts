@@ -1,5 +1,5 @@
 import { Command, CommandRunner } from 'nest-commander';
-import { GenerateKeyCommandInputOptions } from './admin-management.models';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Command({
   name: 'list-all-keys',
@@ -9,15 +9,16 @@ import { GenerateKeyCommandInputOptions } from './admin-management.models';
   },
 })
 export class ListAllKeysCommand extends CommandRunner {
-  async run(
-    passedParams: string[],
-    options: GenerateKeyCommandInputOptions,
-  ): Promise<void> {
-    if (!options?.level) {
-      console.error('Missing level');
-    } else {
-      console.log('Level', options.level);
-    }
-    console.log('Keys Listed', passedParams, options);
+  async run(): Promise<void> {
+    const prismaClient = new PrismaService();
+    const allKeys = (await prismaClient.userAccessKey.findMany()).map((key) => {
+      return {
+        id: key.id,
+        type: key.type,
+        expiry: key.expiry,
+        limit: key.ratelimit,
+      };
+    });
+    console.log(allKeys);
   }
 }

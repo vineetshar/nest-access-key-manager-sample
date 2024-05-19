@@ -78,6 +78,8 @@ export class GenerateKeyCommand extends CommandRunner {
       throw new Error('Expiry is required');
     }
 
+    //validate username
+
     const sharedSecret = '1234';
     const generatedKey = uuidv4();
     const signature = crypto
