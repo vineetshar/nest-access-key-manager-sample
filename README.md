@@ -1,33 +1,87 @@
-# access-key-commands-nest-sample
-A sample codebase to work with access keys written in nestJS
+# Access Key Commands Nest Sample
 
-PGADMIN HOST : host.docker.internal
-REST config for db connections in individual docker-compose per repo 
+A sample codebase to work with access keys written in NestJS.
 
-Commands for access-key-generator:
+## PGAdmin Configuration
+- **Host**: `host.docker.internal`
+- REST config for DB connections is in individual `docker-compose` files per repository.
 
-npm i
-npm run build
-npx prisma migrate dev 
+## Access Key Generator Commands
 
-Admin commands
-npm run list-all-keys
-npm run generate-key -- --level=admin --username=vineet --ratelimit=10 --expiry=10-11-2024
-npm run delete-key --  --key-id=clwdrmjpu0000ax0t4jwcilt8
-npm run update-rate-limit -- -k clwdrkf830000lrz76f73rgdh -r 10
-npm run update-expiry -- -k clwdrkf830000lrz76f73rgdh -e 10-10-2024
+### Setup
+1. Install dependencies:
+   ```bash
+   npm i
+   ```
+2. Build the project:
+   ```bash
+   npm run build
+   ```
+3. Run database migrations:
+   ```bash
+   npx prisma migrate dev
+   ```
 
-User commands 
-npm run update-key-status -- -k clwdrfbdq000054lt4clwrqch -s enabled
-npm run fetch-key-details -- -k clwdrfbdq000054lt4clwrqch
+### Admin Commands
+- List all keys:
+  ```bash
+  npm run list-all-keys
+  ```
+- Generate a new key:
+  ```bash
+  npm run generate-key -- --level=admin --username=vineet --ratelimit=10 --expiry=10-11-2024
+  ```
+- Delete a key:
+  ```bash
+  npm run delete-key -- --key-id=clwdrmjpu0000ax0t4jwcilt8
+  ```
+- Update rate limit:
+  ```bash
+  npm run update-rate-limit -- -k clwdrkf830000lrz76f73rgdh -r 10
+  ```
+- Update expiry date:
+  ```bash
+  npm run update-expiry -- -k clwdrkf830000lrz76f73rgdh -e 10-10-2024
+  ```
 
+### User Commands
+- Update key status:
+  ```bash
+  npm run update-key-status -- -k clwdrfbdq000054lt4clwrqch -s enabled
+  ```
+- Fetch key details:
+  ```bash
+  npm run fetch-key-details -- -k clwdrfbdq000054lt4clwrqch
+  ```
 
-Commands for key-information-service:
+## Key Information Service Commands
 
-npm i
-npx prisma migrate dev
-npm run build
-npm run start
+### Setup
+1. Install dependencies:
+   ```bash
+   npm i
+   ```
+2. Run database migrations:
+   ```bash
+   npx prisma migrate dev
+   ```
+3. Build the project:
+   ```bash
+   npm run build
+   ```
+4. Start the service:
+   ```bash
+   npm run start
+   ```
 
-do a get call at localhost 3000 http://localhost:3000/key-information/key -> example -> http://localhost:3000/key-information/1234
+### Usage
+Make a GET call at `http://localhost:3000/key-information/key`.
 
+Example:
+```bash
+http://localhost:3000/key-information/1234
+```
+
+---
+
+This README provides a quick reference for setting up and managing access keys using the provided NestJS sample codebase. For more detailed documentation, please refer to the project's documentation or source code comments.
