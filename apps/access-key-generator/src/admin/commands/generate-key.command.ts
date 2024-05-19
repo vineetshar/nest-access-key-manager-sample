@@ -5,6 +5,7 @@ import * as crypto from 'crypto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { AccessKeyType } from '@prisma/client';
 import { RedisService } from '../../redis/redis.service';
+import { ConfigService } from '@nestjs/config';
 @Command({
   name: 'generate-key',
   options: {
@@ -12,7 +13,10 @@ import { RedisService } from '../../redis/redis.service';
   },
 })
 export class GenerateKeyCommand extends CommandRunner {
-  constructor(private readonly redisService: RedisService) {
+  constructor(
+    private readonly redisService: RedisService,
+    private configService: ConfigService,
+  ) {
     super();
   }
 
@@ -68,6 +72,8 @@ export class GenerateKeyCommand extends CommandRunner {
     options: GenerateKeyCommandInputOptions,
   ): Promise<void> {
     const prismaClient = new PrismaService();
+    const sharedSecret = this.configService.get<string>('SHARED_HASH_KEY');
+
     if (options.level == undefined) {
       throw new Error('Level is required');
     }
@@ -81,15 +87,11 @@ export class GenerateKeyCommand extends CommandRunner {
       throw new Error('Expiry is required');
     }
 
-    //validate username
-
-    const sharedSecret = '1234';
     const generatedKey = uuidv4();
     const signature = crypto
       .createHmac('sha256', sharedSecret)
       .update(generatedKey)
       .digest('hex');
-    console.log('Generating key22');
 
     try {
       const key = await prismaClient.userAccessKey.create({
@@ -102,8 +104,10 @@ export class GenerateKeyCommand extends CommandRunner {
       });
 
       this.redisService.publish('ACCESS_KEY_GENERATED', key);
+      console.log('Generated Access Key is ', generatedKey);
     } catch (error) {
       console.log('error', error);
     }
   }
 }
+// UserAccessKey

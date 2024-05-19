@@ -5,6 +5,7 @@ import { DeleteKeyCommand } from './commands/delete-key.command';
 import { UpdateExpiryCommand } from './commands/update-expiry.command';
 import { UpdateRateLimitCommand } from './commands/update-rate-limit.command';
 import { RedisModule } from '../redis/redis.module';
+import { ConfigModule } from '@nestjs/config';
 @Module({
   providers: [
     GenerateKeyCommand,
@@ -13,6 +14,6 @@ import { RedisModule } from '../redis/redis.module';
     UpdateRateLimitCommand,
     DeleteKeyCommand,
   ],
-  imports: [RedisModule],
+  imports: [RedisModule, ConfigModule],
 })
 export class AdminKeyManagementModule {}

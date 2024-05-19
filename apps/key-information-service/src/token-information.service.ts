@@ -14,7 +14,7 @@ export class TokenInformationService {
 
   async getTokenInformation(accessKey: string): Promise<string> {
     const sharedSecret = '1234';
-    const generatedKey = uuidv4();
+    const generatedKey = accessKey;
     const signature = crypto
       .createHmac('sha256', sharedSecret)
       .update(generatedKey)
@@ -22,7 +22,7 @@ export class TokenInformationService {
 
     const key = await this.prisma.userAccessKey.findFirstOrThrow({
       where: {
-        hash: '123',
+        hash: signature,
       },
     });
 
