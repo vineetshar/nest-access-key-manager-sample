@@ -1,0 +1,7 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+#DS_store-unix-terminal
+.DS_Store
