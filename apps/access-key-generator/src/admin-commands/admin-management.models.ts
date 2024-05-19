@@ -1,11 +1,8 @@
+import { AccessKeyType } from '@prisma/client';
+
 export type GenerateKeyCommandInputOptions = {
   username: string;
-  level: UserAccessType;
-  rateLimit: number;
+  level: AccessKeyType;
+  ratelimit: number;
   expiry: Date;
 };
-
-export enum UserAccessType {
-  ADMIN,
-  LIMITED,
-}
