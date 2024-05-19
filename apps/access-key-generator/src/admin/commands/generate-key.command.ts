@@ -92,8 +92,7 @@ export class GenerateKeyCommand extends CommandRunner {
     console.log('Generating key22');
 
     try {
-      console.log('Generating key');
-      await prismaClient.userAccessKey.create({
+      const key = await prismaClient.userAccessKey.create({
         data: {
           hash: signature,
           expiry: options.expiry,
@@ -102,9 +101,7 @@ export class GenerateKeyCommand extends CommandRunner {
         },
       });
 
-      console.log(`Generated key: ${generatedKey}`);
-      this.redisService.publish('ACCESS_KEY_GENERATED', 123);
-      console.log('event sent');
+      this.redisService.publish('ACCESS_KEY_GENERATED', key);
     } catch (error) {
       console.log('error', error);
     }
