@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import * as crypto from 'crypto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { AccessKeyType } from '@prisma/client';
-
+import { RedisService } from '../../redis/redis.service';
 @Command({
   name: 'generate-key',
   options: {
@@ -12,6 +12,10 @@ import { AccessKeyType } from '@prisma/client';
   },
 })
 export class GenerateKeyCommand extends CommandRunner {
+  constructor(private readonly redisService: RedisService) {
+    super();
+  }
+
   @Option({
     flags: '-l, --level [string]',
     description:
@@ -64,7 +68,6 @@ export class GenerateKeyCommand extends CommandRunner {
     options: GenerateKeyCommandInputOptions,
   ): Promise<void> {
     const prismaClient = new PrismaService();
-
     if (options.level == undefined) {
       throw new Error('Level is required');
     }
@@ -86,8 +89,10 @@ export class GenerateKeyCommand extends CommandRunner {
       .createHmac('sha256', sharedSecret)
       .update(generatedKey)
       .digest('hex');
+    console.log('Generating key22');
 
     try {
+      console.log('Generating key');
       await prismaClient.userAccessKey.create({
         data: {
           hash: signature,
@@ -98,8 +103,10 @@ export class GenerateKeyCommand extends CommandRunner {
       });
 
       console.log(`Generated key: ${generatedKey}`);
+      this.redisService.publish('ACCESS_KEY_GENERATED', 123);
+      console.log('event sent');
     } catch (error) {
-      console.log(error);
+      console.log('error', error);
     }
   }
 }
