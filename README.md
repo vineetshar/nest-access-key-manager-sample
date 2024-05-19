@@ -6,9 +6,7 @@ A sample codebase to work with access keys written in NestJS.
 - **Host**: `host.docker.internal`
 - Individual config for DB connections is in individual `docker-compose` files per repository.
 
-## Access Key Generator Commands
-
-### Setup for each app
+### Setup for access-key-generator app (after getting infra up via docker-compose up)
 1. Install dependencies:
    ```bash
    npm i
@@ -21,8 +19,8 @@ A sample codebase to work with access keys written in NestJS.
    ```bash
    npx prisma migrate dev
    ```
-
-### Sample Admin Commands
+## Access Key Generator Commands
+### Admin Commands
 Note : The admin app has no validation as of now - it doesnt validate for admins
 - List all keys:
   ```bash
@@ -55,7 +53,7 @@ Note : The admin app has no validation as of now - it doesnt validate for admins
   npm run fetch-key-details -- -k clwdrfbdq000054lt4clwrqch
   ```
 
-## Key Information Service Commands
+## Key Information Service Commands (after getting infra up via docker-compose up)
 
 ### Setup
 1. Install dependencies:
@@ -75,7 +73,7 @@ Note : The admin app has no validation as of now - it doesnt validate for admins
    npm run start
    ```
 
-### Usage
+### Usage for key validation in key-information-service
 Make a GET call at `http://localhost:3000/key-information/key`.
 
 Example:
