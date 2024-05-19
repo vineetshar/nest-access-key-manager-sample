@@ -25,4 +25,5 @@ model UserAccessKey {
   expiry    DateTime
   ratelimit Int
   enabled   Boolean       @default(true)
+  usedlimit Int           @default(0)
 }
