@@ -6,6 +6,13 @@ A sample codebase to work with access keys written in NestJS.
 - **Host**: `host.docker.internal`
 - Individual config for DB connections is in individual `docker-compose` files per repository.
 
+
+## Setup Steps
+1. Docker compose up in root directory
+2. cd && Docker compose up in apps/access-key-generator directory
+3. cd && Docker compose up in apps/key-information-service directory
+4. Let docker running in background
+
 ### Setup for access-key-generator app (after getting infra up via docker-compose up)
 1. Install dependencies:
    ```bash
@@ -83,4 +90,4 @@ http://localhost:3000/key-information/1234
 
 ---
 
-This README provides a quick reference for setting up and managing access keys using the provided NestJS sample codebase. For more detailed documentation, please refer to the project's documentation or source code comments.
+This README provides a quick reference for setting up and managing access keys using the provided NestJS sample codebase.
