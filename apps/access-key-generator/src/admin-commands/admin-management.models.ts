@@ -8,5 +8,15 @@ export type GenerateKeyCommandInputOptions = {
 };
 
 export type DeleteKeyCommandInputOptions = {
-  keyId: string;
+  key: string;
+};
+
+export type UpdateKeyRateLimitCommandInputOptions = {
+  key: string;
+  ratelimit: number;
+};
+
+export type UpdateKeyExpiryCommandInputOptions = {
+  key: string;
+  expiry: Date;
 };

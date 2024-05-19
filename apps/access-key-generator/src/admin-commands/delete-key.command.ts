@@ -10,8 +10,8 @@ import { DeleteKeyCommandInputOptions } from './admin-management.models';
 })
 export class DeleteKeyCommand extends CommandRunner {
   @Option({
-    flags: '-kid, --key-id [string]',
-    description: 'Key id of key you want to delete',
+    flags: '-k, --key [string]',
+    description: 'Key that you want to delete',
   })
   parseKeyId(val: string): string {
     return val;
@@ -21,15 +21,20 @@ export class DeleteKeyCommand extends CommandRunner {
     options: DeleteKeyCommandInputOptions,
   ): Promise<void> {
     const prismaClient = new PrismaService();
-    console.log('got', options);
-    if (!options.keyId) {
-      throw new Error('Key id is required');
+
+    if (!options.key) {
+      throw new Error('Key is required');
     }
-    const deleted = await prismaClient.userAccessKey.delete({
-      where: {
-        id: options.keyId,
-      },
-    });
-    console.log('Key Deleted', deleted);
+
+    try {
+      await prismaClient.userAccessKey.delete({
+        where: {
+          id: options.key,
+        },
+      });
+      console.log('Key Deleted Succesfully');
+    } catch (e) {
+      console.error('Error deleting key', e);
+    }
   }
 }

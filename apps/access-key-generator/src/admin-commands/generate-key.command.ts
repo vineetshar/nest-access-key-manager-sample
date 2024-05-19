@@ -48,8 +48,8 @@ export class GenerateKeyCommand extends CommandRunner {
   }
 
   @Option({
-    flags: '-e, --expiry [number]',
-    description: 'Expiry time for the generated key in seconds',
+    flags: '-e, --expiry [Date]',
+    description: 'Expiry time for the generated key in DD-MM-YYYY format',
   })
   parseExpiry(val: string): Date {
     const expiry = new Date(val);
@@ -87,8 +87,6 @@ export class GenerateKeyCommand extends CommandRunner {
       .update(generatedKey)
       .digest('hex');
 
-    console.log(`Generated key: ${generatedKey}`);
-
     try {
       await prismaClient.userAccessKey.create({
         data: {
@@ -98,6 +96,8 @@ export class GenerateKeyCommand extends CommandRunner {
           ratelimit: options.ratelimit,
         },
       });
+
+      console.log(`Generated key: ${generatedKey}`);
     } catch (error) {
       console.log(error);
     }
