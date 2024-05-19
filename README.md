@@ -4,11 +4,11 @@ A sample codebase to work with access keys written in NestJS.
 
 ## PGAdmin Configuration
 - **Host**: `host.docker.internal`
-- REST config for DB connections is in individual `docker-compose` files per repository.
+- Individual config for DB connections is in individual `docker-compose` files per repository.
 
 ## Access Key Generator Commands
 
-### Setup
+### Setup for each app
 1. Install dependencies:
    ```bash
    npm i
@@ -22,7 +22,8 @@ A sample codebase to work with access keys written in NestJS.
    npx prisma migrate dev
    ```
 
-### Admin Commands
+### Sample Admin Commands
+Note : The admin app has no validation as of now - it doesnt validate for admins
 - List all keys:
   ```bash
   npm run list-all-keys
