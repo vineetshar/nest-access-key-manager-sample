@@ -1,14 +1,16 @@
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import Redis from 'ioredis';
 
 @Injectable()
 export class RedisService implements OnModuleInit, OnModuleDestroy {
+  constructor(private configService: ConfigService) {}
   private client: Redis;
 
   onModuleInit() {
     this.client = new Redis({
-      host: 'localhost',
-      port: 6379,
+      host: this.configService.get<string>('REDIS_HOST'),
+      port: this.configService.get<string>('REDIS_PORT') as unknown as number,
     });
   }
 
@@ -20,7 +22,7 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
     try {
       await this.client.publish(channel, JSON.stringify(message));
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 }

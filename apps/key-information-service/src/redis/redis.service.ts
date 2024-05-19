@@ -1,14 +1,16 @@
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import Redis from 'ioredis';
 
 @Injectable()
 export class RedisService implements OnModuleInit, OnModuleDestroy {
+  constructor(private configService: ConfigService) {}
   private subscriber: Redis;
 
   onModuleInit() {
     this.subscriber = new Redis({
-      host: 'localhost',
-      port: 6379,
+      host: this.configService.get<string>('REDIS_HOST'),
+      port: this.configService.get<string>('REDIS_PORT') as unknown as number,
     });
   }
 
@@ -17,14 +19,8 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
   }
 
   async subscribe(channel: string, callback: (message: string) => void) {
-    const subscriber = new Redis({
-      host: 'localhost',
-      port: 6379,
-    });
-
-    subscriber.subscribe(channel);
-    subscriber.on('message', (channel, message) => {
-      console.log('Received message:', channel, message);
+    this.subscriber.subscribe(channel);
+    this.subscriber.on('message', (channel, message) => {
       callback(message);
     });
   }

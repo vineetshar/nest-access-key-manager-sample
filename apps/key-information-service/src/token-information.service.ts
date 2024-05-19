@@ -1,19 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from './prisma/prisma.service';
-import { v4 as uuidv4 } from 'uuid';
 import * as crypto from 'crypto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class TokenInformationService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private configService: ConfigService,
+  ) {}
 
   async getTokenInformation(accessKey: string): Promise<string> {
-    const sharedSecret = '1234';
+    const sharedSecret = this.configService.get<string>('SHARED_HASH_KEY');
     const generatedKey = accessKey;
     const signature = crypto
       .createHmac('sha256', sharedSecret)
