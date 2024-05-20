@@ -1,6 +1,7 @@
 # Access Key Commands Nest Sample
 
 A sample codebase to work with access keys written in NestJS.
+Note: This has no auth , please apply your own.
 
 ## PGAdmin Configuration
 - **Host**: `host.docker.internal`
