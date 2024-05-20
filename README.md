@@ -26,6 +26,9 @@ A sample codebase to work with access keys written in NestJS.
    ```bash
    npx prisma migrate dev
    ```
+     ```bash
+   npx prisma migrate deploy
+   ```
 ## Access Key Generator Commands
 ### Admin Commands
 Note : The admin app has no validation as of now - it doesnt validate for admins
