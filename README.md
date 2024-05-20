@@ -74,6 +74,9 @@ Note : The admin app has no validation as of now - it doesnt validate for admins
    ```bash
    npx prisma migrate dev
    ```
+     ```bash
+   npx prisma migrate deploy
+   ```
 3. Build the project:
    ```bash
    npm run build
